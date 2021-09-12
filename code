@@ -1,0 +1,35 @@
+Sub vba_challenge()
+    
+    lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+    
+    Cells(1, 9).Value = "Ticker"
+    For i = 2 To lastrow
+        Cells(i, 9).Value = Cells(i, 1)
+    Next i
+    
+    Cells(1, 10).Value = "Yearly Change"
+    For i = 2 To lastrow
+        Cells(i, 10).Value = (Cells(i, 3) - Cells(i, 6))
+        
+        If Cells(i, 10).Value > 0 Then
+        Cells(i, 10).Interior.ColorIndex = 4
+        End If
+        
+        If Cells(i, 10).Value < 0 Then
+        Cells(i, 10).Interior.ColorIndex = 3
+        End If
+        
+        Next i
+    
+    Cells(1, 11).Value = "Percent Change"
+    For i = 2 To lastrow
+        Cells(i, 11).Value = (((Cells(i, 6) - Cells(i, 3)) / Cells(i, 6)))
+        Cells(i, 11).Value = FormatPercent(Cells(i, 11))
+        Next i
+        
+    Cells(i, 12).Value = "Total Stock Volume"
+    For i = 2 To lastrow
+        Cells(i, 12).Value = (Cells(i, 6) * Cells(i, 7))
+        Next i
+    
+End Sub
